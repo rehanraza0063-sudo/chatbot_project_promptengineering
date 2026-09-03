@@ -1,0 +1,48 @@
+import sympy as sp
+
+def chatbot():
+    print("🤖 Math Chatbot Ready!")
+    print("I can solve: simultaneous equations, quadratic equations, integration, differentiation")
+    print("Type 'exit' to quit.\n")
+
+    while True:
+        user_input = input("You: ").lower()
+
+        if user_input == "exit":
+            print("Chatbot: Goodbye! 👋")
+            break
+
+        elif "simultaneous" in user_input:
+            print("Enter equations (e.g., x+y-2, x-y-0):")
+            eq1 = input("Equation 1: ")
+            eq2 = input("Equation 2: ")
+            x, y = sp.symbols('x y')
+            sol = sp.solve([sp.sympify(eq1), sp.sympify(eq2)], (x, y))
+            print("Solution:", sol)
+
+        elif "quadratic" in user_input:
+            print("Enter quadratic equation (e.g., x**2 + 5*x + 6):")
+            eq = input("Equation: ")
+            x = sp.symbols('x')
+            sol = sp.solve(sp.sympify(eq), x)
+            print("Roots:", sol)
+
+        elif "integrate" in user_input:
+            print("Enter function to integrate (e.g., x**2):")
+            expr = input("Function: ")
+            x = sp.symbols('x')
+            result = sp.integrate(sp.sympify(expr), x)
+            print("Integral:", result)
+
+        elif "differentiate" in user_input:
+            print("Enter function to differentiate (e.g., x**3):")
+            expr = input("Function: ")
+            x = sp.symbols('x')
+            result = sp.diff(sp.sympify(expr), x)
+            print("Derivative:", result)
+
+        else:
+            print("Chatbot: I didn’t understand. Try 'simultaneous', 'quadratic', 'integrate', or 'differentiate'.")
+
+if __name__ == "__main__":
+    chatbot()
