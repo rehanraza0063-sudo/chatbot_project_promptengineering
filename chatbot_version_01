@@ -1,0 +1,347 @@
+import tkinter as tk
+from tkinter import scrolledtext
+from datetime import datetime
+import random
+
+
+# ============================================================
+# AI CHATBOT - RULE BASED
+# Educational Python Project
+# ============================================================
+
+def chatbot_response(user_message):
+    message = user_message.lower().strip()
+
+    # Greetings
+    if any(word in message for word in
+           ["hello", "hi", "hey", "hii", "hola"]):
+
+        responses = [
+            "Hello! 👋 How can I help you?",
+            "Hi there! 😊 What would you like to know?",
+            "Hey! I'm ready to chat with you.",
+            "Hello! Ask me something."
+        ]
+
+        return random.choice(responses)
+
+    # How are you
+    elif "how are you" in message:
+        return "I'm doing great! Thanks for asking. 😊"
+
+    # Name
+    elif "your name" in message or "who are you" in message:
+        return (
+            "I'm a Python-based chatbot created using "
+            "Tkinter and rule-based programming."
+        )
+
+    # Creator
+    elif "who created you" in message or "who made you" in message:
+        return "I was created as a Python project using VS Code."
+
+    # Python
+    elif "what is python" in message or "python" == message:
+        return (
+            "Python is a high-level, interpreted programming language "
+            "known for its simple syntax and wide use in AI, data science, "
+            "web development, automation, and software development."
+        )
+
+    # AI
+    elif "what is ai" in message or "artificial intelligence" in message:
+        return (
+            "Artificial Intelligence, or AI, is a field of computer science "
+            "that enables machines to perform tasks that normally require "
+            "human intelligence."
+        )
+
+    # Machine Learning
+    elif "machine learning" in message or "what is ml" in message:
+        return (
+            "Machine Learning is a branch of AI where computers learn "
+            "patterns from data and use them to make predictions or decisions."
+        )
+
+    # Computer Science
+    elif "computer science" in message:
+        return (
+            "Computer Science is the study of computation, algorithms, "
+            "programming, data, software, and computer systems."
+        )
+
+    # Biomedical Engineering
+    elif "biomedical engineering" in message:
+        return (
+            "Biomedical Engineering combines engineering, biology, and "
+            "medicine to develop technologies such as medical devices, "
+            "diagnostic systems, and healthcare software."
+        )
+
+    # Time
+    elif "time" in message:
+        current_time = datetime.now().strftime("%I:%M %p")
+        return f"The current time is {current_time}. ⏰"
+
+    # Date
+    elif "date" in message or "today" in message:
+        current_date = datetime.now().strftime("%d %B %Y")
+        return f"Today's date is {current_date}. 📅"
+
+    # Help
+    elif "help" in message:
+        return (
+            "You can ask me things like:\n\n"
+            "• What is Python?\n"
+            "• What is AI?\n"
+            "• What is Machine Learning?\n"
+            "• What is Biomedical Engineering?\n"
+            "• What time is it?\n"
+            "• What is today's date?\n"
+            "• Who are you?"
+        )
+
+    # Thanks
+    elif any(word in message for word in
+             ["thank you", "thanks", "thank"]):
+        return "You're welcome! 😊"
+
+    # Goodbye
+    elif any(word in message for word in
+             ["bye", "goodbye", "exit", "quit"]):
+        return "Goodbye! 👋 Have a great day!"
+
+    # Simple calculations
+    elif message.startswith("calculate"):
+        try:
+            expression = message.replace("calculate", "").strip()
+
+            # Only allow basic mathematical characters
+            allowed = "0123456789+-*/(). "
+
+            if all(char in allowed for char in expression):
+                result = eval(expression)
+                return f"The answer is: {result}"
+            else:
+                return "Please enter a basic mathematical expression."
+
+        except:
+            return "I couldn't calculate that. Please check the expression."
+
+    # Default response
+    else:
+        return (
+            "I'm still learning! 🤖\n\n"
+            "Try asking me about Python, AI, Machine Learning, "
+            "Biomedical Engineering, the date, or the time.\n\n"
+            "Type 'help' to see what I can do."
+        )
+
+
+# ============================================================
+# SEND MESSAGE
+# ============================================================
+
+def send_message(event=None):
+
+    user_message = input_box.get().strip()
+
+    if user_message == "":
+        return
+
+    # Display user message
+    chat_area.config(state=tk.NORMAL)
+
+    chat_area.insert(
+        tk.END,
+        "You: " + user_message + "\n",
+        "user"
+    )
+
+    # Get chatbot response
+    response = chatbot_response(user_message)
+
+    # Display bot response
+    chat_area.insert(
+        tk.END,
+        "Bot: " + response + "\n\n",
+        "bot"
+    )
+
+    chat_area.config(state=tk.DISABLED)
+
+    # Clear input box
+    input_box.delete(0, tk.END)
+
+    # Automatically scroll to bottom
+    chat_area.see(tk.END)
+
+
+# ============================================================
+# CLEAR CHAT
+# ============================================================
+
+def clear_chat():
+
+    chat_area.config(state=tk.NORMAL)
+
+    chat_area.delete("1.0", tk.END)
+
+    chat_area.insert(
+        tk.END,
+        "Bot: Hello! 👋 I'm your Python chatbot.\n"
+        "Bot: Type 'help' to see what I can do.\n\n",
+        "bot"
+    )
+
+    chat_area.config(state=tk.DISABLED)
+
+
+# ============================================================
+# MAIN WINDOW
+# ============================================================
+
+root = tk.Tk()
+
+root.title("AI Chatbot - Python")
+root.geometry("700x650")
+
+root.resizable(False, False)
+
+
+# ============================================================
+# TITLE
+# ============================================================
+
+title = tk.Label(
+    root,
+    text="🤖 AI CHATBOT",
+    font=("Arial", 24, "bold")
+)
+
+title.pack(pady=(15, 5))
+
+
+subtitle = tk.Label(
+    root,
+    text="Rule-Based Chatbot developed using Python",
+    font=("Arial", 11)
+)
+
+subtitle.pack(pady=(0, 15))
+
+
+# ============================================================
+# CHAT AREA
+# ============================================================
+
+chat_area = scrolledtext.ScrolledText(
+    root,
+    width=75,
+    height=25,
+    font=("Arial", 11),
+    wrap=tk.WORD
+)
+
+chat_area.pack(
+    padx=20,
+    pady=5
+)
+
+# Text formatting
+chat_area.tag_config(
+    "user",
+    font=("Arial", 11, "bold")
+)
+
+chat_area.tag_config(
+    "bot",
+    font=("Arial", 11)
+)
+
+chat_area.config(state=tk.NORMAL)
+
+chat_area.insert(
+    tk.END,
+    "Bot: Hello! 👋 I'm your Python chatbot.\n"
+    "Bot: Type 'help' to see what I can do.\n\n",
+    "bot"
+)
+
+chat_area.config(state=tk.DISABLED)
+
+
+# ============================================================
+# INPUT FRAME
+# ============================================================
+
+input_frame = tk.Frame(root)
+
+input_frame.pack(
+    padx=20,
+    pady=15,
+    fill=tk.X
+)
+
+
+# Input box
+
+input_box = tk.Entry(
+    input_frame,
+    font=("Arial", 12)
+)
+
+input_box.pack(
+    side=tk.LEFT,
+    fill=tk.X,
+    expand=True,
+    ipady=8
+)
+
+
+# Send button
+
+send_button = tk.Button(
+    input_frame,
+    text="SEND",
+    font=("Arial", 11, "bold"),
+    command=send_message,
+    padx=20,
+    pady=7
+)
+
+send_button.pack(
+    side=tk.LEFT,
+    padx=8
+)
+
+
+# Clear button
+
+clear_button = tk.Button(
+    input_frame,
+    text="CLEAR",
+    font=("Arial", 11, "bold"),
+    command=clear_chat,
+    padx=15,
+    pady=7
+)
+
+clear_button.pack(
+    side=tk.LEFT
+)
+
+
+# Press Enter to send
+input_box.bind("<Return>", send_message)
+
+
+# Put cursor in input box
+input_box.focus()
+
+
+# ============================================================
+# START APPLICATION
+# ============================================================
+
+root.mainloop()
