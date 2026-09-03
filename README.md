@@ -1,12 +1,12 @@
-# 🧠 AI Chatbot Project — Python Powered
+#  AI Chatbot Project — Python Powered
 
 This repository contains a series of **AI Chatbots** developed in Python, showcasing different approaches to conversational intelligence and problem-solving.
 
 ---
 
-## 📌 Project Versions
+##  Project Versions
 
-### 🌐 Version 1 — Rule-Based Chatbot (Web Interface)
+###  Version 1 — Rule-Based Chatbot (Web Interface)
 - Built using **Tkinter** with a **web-style GUI**.
 - Provides responses to queries on topics like:
   - Python Programming
@@ -16,7 +16,7 @@ This repository contains a series of **AI Chatbots** developed in Python, showca
 
 ---
 
-### 🤖 Version 2 — AI Assistant (Web Interface)
+###  Version 2 — AI Assistant (Web Interface)
 - Powered by the **OpenAI API**.
 - Runs on a **Tkinter web interface**.
 - Offers intelligent, context-aware responses.
@@ -24,7 +24,7 @@ This repository contains a series of **AI Chatbots** developed in Python, showca
 
 ---
 
-### 🧮 Version 3 — Math Chatbot (Terminal)
+###  Version 3 — Math Chatbot (Terminal)
 - Operates directly in the **terminal**.
 - Capable of solving:
   - Quadratic equations
@@ -35,7 +35,7 @@ This repository contains a series of **AI Chatbots** developed in Python, showca
 
 ---
 
-## 🚀 Tech Stack
+##  Tech Stack
 - **Python 3.x**
 - **Tkinter** (GUI)
 - **OpenAI API** (for Version 2)
@@ -43,4 +43,4 @@ This repository contains a series of **AI Chatbots** developed in Python, showca
 
 ---
 
-## 📂 Repository Structure
+
